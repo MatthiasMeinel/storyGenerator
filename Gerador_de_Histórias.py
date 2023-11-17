@@ -1,6 +1,5 @@
 import streamlit as st
 import openai
-from streamlit_lottie import st_lottie
 import json
 import time
 
@@ -53,27 +52,18 @@ if authentication_status:
     ) 
         return response.choices[0].message.content.strip('\"')
 
-
-    def load_lottie_file(filepath: str):
-        with open(filepath,'r') as f:
-            return json.load(f)
-    
     authenticator.logout("Logout", "sidebar")
     st.title('Gerador de Histórias')
     word_list=st.text_input("Quais palavras você quer revisar na sua história?")
     if word_list:
         my_placeholder = st.empty()
         my_message = st.empty()  
-        with my_placeholder:
-            st.write('Sua história está sendo escrita')
-            time.sleep(3)
-
-            st_lottie(load_lottie_file('animation_lnm49yam.json'), height=400,width=400)
+       
             
         my_story = text_generator(word_list)
         my_placeholder.empty()
         st.write('Em seguida sua história:')
-        time.sleep(3)
+
         st.write(my_story)
 
 
